@@ -1,0 +1,108 @@
+int leds1[7]={0,1,2,3,4,5,6}; //declaración de vector
+int leds2[7]={13,12,11,10,9,8,7}; //declaración de vector
+int leds3[14]={0,1,2,3,4,5,6,7,8,9,10,11,12,13}; //declaración de vector
+int leds4[14]={13,12,11,10,9,8,7,6,5,4,3,2,1,0}; //declaración de vector
+int i,j; //declaración del contadores
+void setup() {
+  // put your setup code here, to run once:
+  
+  pinMode(0,OUTPUT);   //ping 0, declarado como salida
+  pinMode (1,OUTPUT);  //ping 1, declarado como salida 
+  pinMode(2,OUTPUT);   //ping 2, declarado como salida
+  pinMode (3,OUTPUT);  //ping 3, declarado como salida
+  pinMode(4,OUTPUT);   //ping 4, declarado como salida
+  pinMode (5,OUTPUT);  //ping 5, declarado como salida
+  pinMode(6,OUTPUT);   //ping 6, declarado como salida
+  pinMode (7,OUTPUT);  //ping 7, declarado como salida
+  pinMode(8,OUTPUT);   //ping 8, declarado como salida
+  pinMode (9,OUTPUT);  //ping 9, declarado como salida
+  pinMode(10,OUTPUT);  //ping 10, declarado como salida
+  pinMode (11,OUTPUT); //ping 11, declarado como salida
+  pinMode (12,OUTPUT); //ping 12, declarado como salida
+  pinMode(13,OUTPUT);  //ping 13, declarado como salida
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+   juego1();      //llama al método juego 1
+   delay (500);   //tiempo de duración del método(perceptible para el ojo humano)
+   juego2();      //llama al método juego 2
+   delay (500);   //tiempo de duración del método(perceptible para el ojo humano)
+   juego3();      //llama al método juego 3
+   delay (500);   //tiempo de duración del método(perceptible para el ojo humano)
+   apagado();     //llama al método apagado
+   delay(200);    //tiempo de duración del método(perceptible para el ojo humano)
+   encendido ();  //llama al método encendido
+   delay(300);    //tiempo de duración del método(perceptible para el ojo humano)
+   apagado();     //llama al método apagado
+   delay(300);    //tiempo de duración del método(perceptible para el ojo humano)
+   encendido ();  //llama al método encendido
+   delay(300);    //tiempo de duración del método(perceptible para el ojo humano)
+   apagado();     //llama al método apagado
+   delay(300);    //tiempo de duración del método(perceptible para el ojo humano)
+}
+void juego1 (){    // primer juego de luces, luces que prenden hacia el centro
+    i=0;            // declaración del contador i
+    for(;i<6;i++){  // condición de encendido y apagada de las luces por el ciclo for
+      digitalWrite(leds1[i],HIGH);      //encide el led de la matriz leds1 en la posicion del contador i
+      digitalWrite(leds2[i],HIGH);      //encide el led de la matriz leds2 en la posicion del contador i
+      delay(100);                       // duración
+      digitalWrite(leds1[i],LOW);       //apaga el led de la matriz leds1 en la posicion del contador i
+      digitalWrite(leds2[i],LOW);       //apaga el led de la matriz leds2 en la posicion del contador i
+      delay(100);                       // duración
+      
+    }
+    i=6;                                //declaración contador i                              
+    for (;i>=0;i--){                    // condición de encendido y apagada de las luces por el ciclo for
+      digitalWrite(leds1[i],HIGH);      //encide el led de la matriz leds1 en la posicion del contador i
+      digitalWrite(leds2[i],HIGH);      //encide el led de la matriz leds2 en la posicion del contador i
+      delay(100);                       // duración
+      digitalWrite(leds1[i],LOW);       //apaga el led de la matriz leds1 en la posicion del contador i
+      digitalWrite(leds2[i],LOW);       //encide el led de la matriz leds2 en la posicion del contador i
+      delay(100);                       //duración
+    }
+    }
+void juego2 (){                         // segundo juego de luces, que se prenden hasta la mitad y se apagan y la otra mitad sigue encendida
+      i=0;                              // contador
+      for(;i<14;i++){                   //condición de encendido y apagado de los leds
+      digitalWrite(leds3[i++],HIGH);    // encendido de los leds de la matriz leds3 uno x uno
+      digitalWrite(leds4[i--], LOW);    // apagado de los leds de la matriz leds4 desde la mitad de los leds
+      delay(100);                       // duración
+      } 
+      j=0;                              //contador
+      for(;j<14;j++){                   // condición de encendido de los leds de la matriz leds4
+      digitalWrite(leds4[j],HIGH);      // enciende todos los leds de la matriz leds4, uno x uno
+      delay(100);                       //duración
+      }
+      for(;j>=0;j--){                   //condición de apagado de los leds, condicion j-- es para el apagado uno x uno pero de bajada
+      digitalWrite(leds4[j],LOW);       // apagado de los leds de la matriz leds4
+      delay(100);                       //duración
+      } 
+      }
+
+void juego3 (){                       // juego de luces que aprende saltando uno, y luego se prenden los que estaban apagados inicialmente y los otros se apagan uno x uno
+      i=0;                            // contador
+      for(;i<14;i+1){                 // condicion para encendido de las luces saltando un led por ello i+1
+      digitalWrite(leds3[i++],HIGH);  // encendido del led en la posicion i++ para saltar un led 
+      digitalWrite(leds3[i++], LOW);  // apagado del led saltado 
+      delay(200);                     // duración
+      }
+      j=j+1;                          //contador
+      for(;j<14;j+1){                 // condicion para encendido de las luces saltando un led por ello j+1
+      digitalWrite(leds4[j++],HIGH);  // encendido del led en la posicion j++ para saltar un led de la matriz leds4
+      digitalWrite(leds4[j++],LOW);   // apagado del led saltado de la matriz leds4
+      delay(500);                     //duración
+      }
+  }
+void apagado (){                      // método de apapago
+    j=14;                            // contador
+    for(;j>=0;j--){                  // condición para el apagado de los led en general
+      digitalWrite(leds4[j],LOW);    // apagado de los led en la posicion j, los leds se apagaran de una todos por no tener la duración de apagado
+      } 
+  }
+void encendido (){                  //método de encendido
+  i=0;                              // contador
+  for(;i<14;i++){                   // condición para el encendido de los led en general
+    digitalWrite(leds3[i],HIGH);   // encendido de los led en la posicion i, los leds se encenderan de una todos por no tener la duración de apagado
+    }
+}
